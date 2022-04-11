@@ -1,0 +1,11 @@
+.card .btn{
+    background-color: #7952b3;
+    border: none;
+    color: #fff;
+}
+
+.card .btn:hover{
+    background-color: #9063d4;
+    color: #fff;
+}
+

@@ -1,0 +1,92 @@
+[
+  {
+    "id": "1",
+    "name": "Avita Magus Celeron N3350 FHD Laptop Pastel Violet",
+    "price": 420,
+    "img": "https://www.startech.com.bd/image/cache/catalog/laptop/avita/megus/magus-violet-01-500x500.jpg"
+  },
+  {
+    "id": "2",
+    "name": "HP 15s-du1115TU Celeron N4020 15.6 HD Laptop",
+    "price": 320,
+    "img": "https://www.startech.com.bd/image/cache/catalog/laptop/hp-laptop/15s-du1115tu/15s-du1115tu-01-500x500.jpg"
+  },
+  {
+    "id": "3",
+    "name": "HP 15s-du1114TU Celeron N4020 15.6 HD Laptop",
+    "price": 520,
+    "img": "https://www.startech.com.bd/image/cache/catalog/laptop/hp-laptop/15s-du1114tu/15s-du1114tu-01-500x500.jpg"
+  },
+  {
+    "id": "4",
+    "name": "AVITA Essential 14 Celeron N4020 256GB SSD 14 Full HD Laptop",
+    "price": 220,
+    "img": "https://www.startech.com.bd/image/cache/catalog/laptop/avita/essential-14/essential-14-02-500x500.jpg"
+  },
+  {
+    "id": "5",
+    "name": "Asus Vivobook X515MA Celeron N4020 15.6 HD Laptop",
+    "price": 250,
+    "img": "https://www.startech.com.bd/image/cache/catalog/laptop/asus/vivobook-15-x515ea/vivobook-15-x515ea-01-500x500.jpg"
+  },
+  {
+    "id": "6",
+    "name": "Lenovo IdeaPad Slim 3i 15IGL Intel Celeron N4020 15.6 HD Laptop",
+    "price": 420,
+    "img": "https://www.startech.com.bd/image/cache/catalog/laptop/lenovo/ideapad-slim-3i/ideapad-slim-3i-0010-500x500.jpg"
+  },
+  {
+    "id": "7",
+    "name": "Dell Inspiron 15 3510 Intel Celeron N4020 15.6 HD Laptop",
+    "price": 520,
+    "img": "https://www.startech.com.bd/image/cache/catalog/laptop/dell/inspiron-15-3510/inspiron-15-3510-01-500x500.jpg"
+  },
+  {
+    "id": "8",
+    "name": "Lenovo IdeaPad Slim 3i Celeron N4020 256GB SSD 15.6 HD Laptop",
+    "price": 350,
+    "img": "https://www.startech.com.bd/image/cache/catalog/laptop/lenovo/slim-3i/slim-3i-001-500x500.jpg"
+  },
+  {
+    "id": "9",
+    "name": "HP 15s-du1117TU Pentium Silver N5030 15.6 HD Laptop",
+    "price": 420,
+    "img": "https://www.startech.com.bd/image/cache/catalog/laptop/hp-laptop/15s-du1117tu/15s-du1117tu-001-500x500.jpg"
+  },
+  {
+    "id": "10",
+    "name": "Asus Vivobook X515MA Celeron N4020 15.6 FHD Laptop",
+    "price": 550,
+    "img": "https://www.startech.com.bd/image/cache/catalog/laptop/asus/vivobook-x515ma/vivobook-x515ma-01-500x500.jpg"
+  },
+  {
+    "id": "11",
+    "name": "Acer Extensa 15 EX215-52-384M Core i3 10th Gen 15.6 FHD Laptop",
+    "price": 360,
+    "img": "https://www.startech.com.bd/image/cache/catalog/laptop/acer/ex215-52-384m/ex215-52-384m-001-500x500.jpg"
+  },
+  {
+    "id": "12",
+    "name": "Dell Inspiron 15 3501 Core i3 10th Gen 15.6 HD Laptop with Windows 10",
+    "price": 520,
+    "img": "https://www.startech.com.bd/image/cache/catalog/laptop/dell/inspiron/dell-intel/dell-intel-001-500x500.jpg"
+  },
+  {
+    "id": "13",
+    "name": "Asus VivoBook 15 E510MA Intel Celeron N4020 15.6 FHD Laptop",
+    "price": 360,
+    "img": "https://www.startech.com.bd/image/cache/catalog/laptop/asus/vivobook-15-e510ma/vivobook-15-e510ma-0101-500x500.jpg"
+  },
+  {
+    "id": "14",
+    "name": "Acer Aspire 3 A315-58 Core i3 11th Gen 15.6 FHD Laptop",
+    "price": 440,
+    "img": "https://www.startech.com.bd/image/cache/catalog/laptop/acer/aspire-3-a315-58/aspire-3-a315-58-001-500x500.jpg"
+  },
+  {
+    "id": "15",
+    "name": "Dell Vostro 14 3400 11th Gen Core i3 14 HD Laptop",
+    "price": 220,
+    "img": "https://www.startech.com.bd/image/cache/catalog/laptop/dell/14-3400/vostro-14-3400-black-front-500x500.jpg"
+  }
+]
