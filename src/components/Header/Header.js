@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { BsFillCartFill } from 'react-icons/bs';
 import './Header.css';
@@ -27,7 +27,7 @@ const Header = () => {
                                 <Link className="nav-link" to='/about'>About</Link>
                             </li>
                             <li className="nav-item ms-5">
-                                <Link className="nav-link" to='/cart'><span><BsFillCartFill /></span></Link>
+                                <Link className="nav-link position-relative" to='/orders'><BsFillCartFill /><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">1</span></Link>
                             </li>
                         </ul>
                     </div>

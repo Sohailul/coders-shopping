@@ -1,8 +1,8 @@
 import React from 'react';
 import {BsFillCartFill} from 'react-icons/bs';
-import './Products.css';
+import './Product.css';
 
-const Products = ({ product, handleAddToCart }) => {
+const Product = ({ product, handleAddToCart }) => {
     const { name, price, img } = product;
     return (
         <div className='col-sm-12 col-md-4 d-flex justify-content-center'>
@@ -21,4 +21,4 @@ const Products = ({ product, handleAddToCart }) => {
     );
 };
 
-export default Products;
+export default Product;

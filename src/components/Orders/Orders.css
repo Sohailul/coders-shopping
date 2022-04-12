@@ -1,0 +1,18 @@
+.review-items-container{
+    margin: 0 auto;
+}
+
+.cart-container{
+    border-radius: 15px;
+    padding: 25px 10px;
+}
+.cart-container .btn{
+    background-color: #7952b3;
+    border: none;
+    color: #fff;
+}
+.cart-container .btn:hover{
+    background-color: #9063d4;
+    color: #fff;
+}
+

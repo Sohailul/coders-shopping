@@ -1,29 +1,56 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useProducts from '../../hooks/useProducts';
-import Header from '../Header/Header';
-import Products from '../Products/Products';
+import { addToDb, getStoredCart } from '../../Utilities/fakedb';
+import Product from '../Products/Product';
+
+
 
 const Shop = () => {
     const [products, setProducts] = useProducts();
     const [cart, setCart] = useState([]);
-    const handleAddToCart = (product) =>{
-        console.log(product);
-        // do not do this: cart.push(product);
-        const newCart = [...cart, product];
+
+    useEffect( () =>{
+        const storedCart = getStoredCart();
+        const savedCart = [];
+        for(const id in storedCart){
+            const addedProduct = products.find(product => product.id === id);
+            if(addedProduct){
+                const quantity = storedCart[id];
+                addedProduct.quantity = quantity;
+                savedCart.push(addedProduct);
+            }
+        }
+        setCart(savedCart);
+    }, [products])
+
+    const handleAddToCart = (selectedProduct) =>{
+        console.log(selectedProduct);
+        let newCart = [];
+        const exists = cart.find(product => product.id === selectedProduct.id);
+        if(!exists){
+            selectedProduct.quantity = 1;
+            newCart = [...cart, selectedProduct];
+        }
+        else{
+            const rest = cart.filter(product => product.id !== selectedProduct.id);
+            exists.quantity = exists.quantity + 1;
+            newCart = [...rest, exists];
+        }
+        
         setCart(newCart);
+        addToDb(selectedProduct.id);
     }
     return (
-        
         <div className='container shop-container mt-5'>
-            <h4 className='fs-5' style={{color: 'gray'}}>Shop Now</h4>
+            <h4 className='fs-5' style={{ color: 'gray' }}>Shop Now</h4>
             <h2 className='mb-5 fw-bold'>Latest Products <span>{cart.length}</span></h2>
             <div className="products-container row g-3 d-flex justify-content-center">
                 {
-                    products.map(product => <Products
+                    products.map(product => <Product
                         key={product.id}
                         product={product}
                         handleAddToCart={handleAddToCart}
-                    ></Products>)
+                    ></Product>)
                 }
             </div>
         </div>
