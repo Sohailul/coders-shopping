@@ -1,13 +1,28 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
+
 
 const Register = () => {
+    const [
+        createUserWithEmailAndPassword,
+        user,
+        loading,
+        error,
+      ] = useCreateUserWithEmailAndPassword(auth);
+      const navigate = useNavigate();
 
+      if(user){
+          navigate('/login');
+      }
     const handleRegister = event =>{
         event.preventDefault();
         const name = event.target.name.value;
         const email = event.target.email.value;
         const password = event.target.password.value;
+
+        createUserWithEmailAndPassword(email, password);
     }
     return (
         <div className='register w-50 mx-auto mt-5 '>
@@ -15,18 +30,18 @@ const Register = () => {
             <form onSubmit={handleRegister}>
                 <div class="form-group fs-5">
                     <label>Name</label>
-                    <input type="text" class="form-control p-3 fs-5" placeholder="Your name" />
+                    <input type="text" name='name' class="form-control p-3 fs-5" placeholder="Your name" />
                 </div>
                 <br/>
                 <div class="form-group fs-5">
                     <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control p-3 fs-5" placeholder="Enter email" />
+                    <input type="email" name='email' class="form-control p-3 fs-5" placeholder="Enter email" />
                     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                 </div>
                 <br/>
                 <div class="form-group fs-5">
                     <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control p-3 fs-5" placeholder="Password" />
+                    <input type="password" name='password' class="form-control p-3 fs-5" placeholder="Password" />
                 </div>
                 <br/>
                 <div className="form-check">
