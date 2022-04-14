@@ -4,8 +4,9 @@ import { BsFillCartFill } from 'react-icons/bs';
 import './Header.css';
 
 const Header = () => {
+
     return (
-        <header className='sticky-top navbar-light bg-light'>
+        <header>
             <nav className="container navbar navbar-expand-lg navbar-light">
                 <div className="container-fluid">
                     <Link className="navbar-brand" to='/' >Coders Shopping</Link>
@@ -26,8 +27,11 @@ const Header = () => {
                             <li className="nav-item">
                                 <Link className="nav-link" to='/about'>About</Link>
                             </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to='/login'>Login</Link>
+                            </li>
                             <li className="nav-item ms-5">
-                                <Link className="nav-link position-relative" to='/orders'><BsFillCartFill /><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">1</span></Link>
+                                <Link className="nav-link position-relative" to='/orders'><BsFillCartFill /><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"></span></Link>
                             </li>
                         </ul>
                     </div>

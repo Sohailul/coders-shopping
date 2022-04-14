@@ -1,11 +1,14 @@
-.card .btn{
+.card .btn {
     background-color: #7952b3;
     border: none;
     color: #fff;
 }
 
-.card .btn:hover{
-    background-color: #9063d4;
-    color: #fff;
+.card .btn-cart {
+    background-color: #E6C2AA;
+    color: #000;
 }
 
+.card .btn:hover {
+    color: #fff;
+}

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { AiOutlineArrowRight, AiOutlineArrowLeft } from 'react-icons/ai';
 import useProducts from '../../hooks/useProducts';
 import { getStoredCart, removeFromDb } from '../../Utilities/fakedb';
 import Cart from '../Cart/Cart';
@@ -11,12 +12,12 @@ const Orders = () => {
     const [cart, setCart] = useState([]);
     const navigate = useNavigate();
 
-    useEffect( () =>{
+    useEffect(() => {
         const storedCart = getStoredCart();
         const savedCart = [];
-        for(const id in storedCart){
+        for (const id in storedCart) {
             const addedProduct = products.find(product => product.id === id);
-            if(addedProduct){
+            if (addedProduct) {
                 const quantity = storedCart[id];
                 addedProduct.quantity = quantity;
                 savedCart.push(addedProduct);
@@ -25,7 +26,7 @@ const Orders = () => {
         setCart(savedCart);
     }, [products])
 
-    const handleRemoveProduct = product =>{
+    const handleRemoveProduct = product => {
         const rest = cart.filter(pd => pd.id !== product.id);
         setCart(rest);
         removeFromDb(product.id);
@@ -33,23 +34,29 @@ const Orders = () => {
 
     return (
         <div className='container'>
-            <h1 className='mt-5'>Shopping cart</h1>
+            <h1 className='mt-5 text-center'>Shopping cart</h1>
             <div className='row d-flex justify-content-center align-items-center mt-5'>
-            <div className="review-items-container col-sm-12 col-md-8">
-                {
-                    cart.map(product => <ReviewItem
-                        key={product.id}
-                        product ={product}
-                        handleRemoveProduct = {handleRemoveProduct}
-                    ></ReviewItem>)
-                }
+                <div className="review-items-container col-sm-12 col-md-8">
+                    {
+                        cart.map(product => <ReviewItem
+                            key={product.id}
+                            product={product}
+                            handleRemoveProduct={handleRemoveProduct}
+                        ></ReviewItem>)
+                    }
+                </div>
+                <div className="cart-container col-sm-12 col-md-4 bg-light fixed">
+                    <Cart cart={cart}>
+                        <div className='text-center'>
+                            <button onClick={() => navigate('/shipment')} className="btn">PROCEED TO CHECKOUT &nbsp;<AiOutlineArrowRight /></button>
+                        </div>
+                    </Cart>
+                    <div className='mt-3'>
+                        <Link to='/shop' className='text-decoration-none text-dark'><AiOutlineArrowLeft />&nbsp;Continue to shopping</Link>
+                    </div>
+                </div>
+
             </div>
-            <div className="cart-container col-sm-12 col-md-4 bg-light fixed">
-                <Cart cart={cart}>
-                        <button onClick={()=>navigate('/shipment')} className="btn">PROCEED TO CHECKOUT</button>
-                </Cart>
-            </div>
-        </div>
         </div>
     );
 };

@@ -1,7 +1,5 @@
 header{
-    height: 100px;
-    display: flex;
-    justify-content: center;
+    background-color: #D9DFFF;
 }
 nav ul li{
     margin-right: 15px;

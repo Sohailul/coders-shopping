@@ -42,11 +42,11 @@ const Shop = () => {
     }
     return (
         <div className='container shop-container mt-5'>
-            <h4 className='fs-5' style={{ color: 'gray' }}>Shop Now</h4>
-            <h2 className='mb-5 fw-bold'>Latest Products <span>{cart.length}</span></h2>
-            <div className="products-container row g-3 d-flex justify-content-center">
+            <h4 className='fs-5 text-center' style={{ color: 'gray' }}>Shop Now</h4>
+            <h2 className='mb-5 fw-bold text-center'>Latest Products</h2>
+            <div className="products-container text-center row g-3 d-flex justify-content-center">
                 {
-                    products.map(product => <Product
+                    products.map(product =><Product
                         key={product.id}
                         product={product}
                         handleAddToCart={handleAddToCart}

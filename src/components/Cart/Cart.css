@@ -2,3 +2,6 @@
 .cart p, h4, h5{
     text-align: left;
 }
+.cart p{
+    font-weight: bold;
+}
