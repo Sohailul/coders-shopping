@@ -1,28 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 
 
 const Register = () => {
+    const [agree, setAgree] = useState(false);
     const [
         createUserWithEmailAndPassword,
         user,
         loading,
         error,
-      ] = useCreateUserWithEmailAndPassword(auth);
-      const navigate = useNavigate();
+    ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+    const navigate = useNavigate();
 
-      if(user){
-          navigate('/login');
-      }
-    const handleRegister = event =>{
+    if (user) {
+        console.log('user', user);
+    }
+    const handleRegister = async (event) => {
         event.preventDefault();
         const name = event.target.name.value;
         const email = event.target.email.value;
         const password = event.target.password.value;
 
-        createUserWithEmailAndPassword(email, password);
+        await createUserWithEmailAndPassword(email, password);
+        await updateProfile({ displayName: name });
+        alert('Updated profile');
+        navigate('/login');
+
     }
     return (
         <div className='register w-50 mx-auto mt-5 '>
@@ -32,25 +38,25 @@ const Register = () => {
                     <label>Name</label>
                     <input type="text" name='name' class="form-control p-3 fs-5" placeholder="Your name" />
                 </div>
-                <br/>
+                <br />
                 <div class="form-group fs-5">
                     <label for="exampleInputEmail1">Email address</label>
                     <input type="email" name='email' class="form-control p-3 fs-5" placeholder="Enter email" />
                     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                 </div>
-                <br/>
+                <br />
                 <div class="form-group fs-5">
                     <label for="exampleInputPassword1">Password</label>
                     <input type="password" name='password' class="form-control p-3 fs-5" placeholder="Password" />
                 </div>
-                <br/>
+                <br />
                 <div className="form-check">
-                    <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-                    <label className="form-check-label" for="exampleCheck1">Accept Terms and Conditions</label>
+                    <input onClick={() => setAgree(!agree)} type="checkbox" className="form-check-input" id="exampleCheck1" />
+                    <label className={agree ? 'text-primary' : 'text-danger'} for="exampleCheck1">Accept Terms and Conditions</label>
                 </div>
-                <br/>
+                <br />
                 <div className='form-group d-flex justify-content-center'>
-                    <button type="submit" class="btn w-100 p-3 fs-5" style={{backgroundColor: "#c5cdf1"}}>Register</button>
+                    <button disabled={!agree} type="submit" class="btn w-100 p-3 fs-5" style={{ backgroundColor: "#c5cdf1" }}>Register</button>
                 </div>
                 <p className='fw-bold text-center mt-2'>Already have an account? <span><Link to='/login' className='text-decoration-none'>Login</Link></span></p>
             </form>

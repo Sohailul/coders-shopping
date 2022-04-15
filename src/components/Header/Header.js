@@ -1,10 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { BsFillCartFill } from 'react-icons/bs';
+import { RiLogoutBoxRFill } from 'react-icons/ri';
 import './Header.css';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
+import { signOut } from 'firebase/auth';
 
 const Header = () => {
+    const [user] = useAuthState(auth);
 
+    const handleSignOut =()=>{
+        signOut(auth);
+    }
     return (
         <header>
             <nav className="container navbar navbar-expand-lg navbar-light">
@@ -27,9 +35,13 @@ const Header = () => {
                             <li className="nav-item">
                                 <Link className="nav-link" to='/about'>About</Link>
                             </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to='/login'>Login</Link>
-                            </li>
+                            {user ?
+                                <button onClick={handleSignOut} className="btn btn-link text-decoration-none text-dark fs-5">Log Out&nbsp;<RiLogoutBoxRFill/></button>
+                                :
+                                <li className="nav-item">
+                                    <Link className="nav-link" to='/login'>Login</Link>
+                                </li>
+                            }
                             <li className="nav-item ms-5">
                                 <Link className="nav-link position-relative" to='/orders'><BsFillCartFill /><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"></span></Link>
                             </li>
