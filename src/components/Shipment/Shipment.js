@@ -1,15 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaShippingFast } from 'react-icons/fa';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 
 const Shipment = () => {
     const [user] = useAuthState(auth);
+    const [email, setEmail] = useState('');
+
+    const handleCreateUser = event =>{
+        event.preventDefault();
+        const name = event.target.name.value;
+        const address = event.target.address.value;
+        const phone = event.target.phone.value;
+        const shipping = {name, email, address, phone};
+        console.log(shipping);
+    }
+    
     return (
         <div className='form-container mt-5'>
             <div className='w-50 mx-auto'>
                 <h2 className='form-title text-center'>Your Shipping Info</h2>
-                <form>
+                <form onSubmit={handleCreateUser}>
                     <div className="form-group fs-5">
                         <label htmlFor="name">Your Name</label>
                         <br/>
@@ -19,7 +30,7 @@ const Shipment = () => {
                     <div className="form-group fs-5">
                         <label htmlFor="email">Your Email</label>
                         <br/>
-                        <input readOnly type="email" value={user.email} name="email" className="form-control p-3 fs-5" placeholder="" required/>
+                        <input readOnly type="email" value={user?.email} name="email" className="form-control p-3 fs-5" placeholder="" required/>
                     </div>
                     <br/>
                     <div className="form-group fs-5">

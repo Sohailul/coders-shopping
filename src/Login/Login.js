@@ -1,5 +1,7 @@
 import React, { useRef } from 'react';
-import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { FcGoogle } from 'react-icons/fc';
+import { BsGithub } from 'react-icons/bs';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -15,6 +17,7 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
     const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
+    const [signInWithGoogle] = useSignInWithGoogle(auth);
     const navigate = useNavigate();
 
     if (user) {
@@ -39,10 +42,20 @@ const Login = () => {
             toast('please enter your email address');
         }
     }
+    const googleSignIn = () => {
+        signInWithGoogle();
+    }
 
     return (
         <div className='w-50 mx-auto mt-5'>
-            <h2 className='text-center'>Please Login</h2>
+            <h2 className='text-center mb-5'>Please Login</h2>
+            <div className='form-group d-flex justify-content-center'>
+                <button onClick={googleSignIn} class="btn w-50" style={{ backgroundColor: "#c5cdf1" }}><FcGoogle />&nbsp;SignIn with Google</button>
+            </div>
+            <div className='form-group d-flex justify-content-center mt-3 mb-3'>
+                <button class="btn w-50" style={{ backgroundColor: "#c5cdf1" }}><BsGithub />&nbsp;SignIn with Github</button>
+            </div>
+            <h3 className='text-center mb-3'>Or</h3>
             <form onSubmit={handleSubmit}>
                 <div className="form-group fs-5">
                     <input ref={emailRef} type="email" name="email" className="form-control p-3 fs-5" placeholder="Enter email" />

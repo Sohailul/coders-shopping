@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { FcGoogle } from 'react-icons/fc';
+import { BsGithub } from 'react-icons/bs';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 
 
@@ -13,6 +15,9 @@ const Register = () => {
         error,
     ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+
+    const [signInWithGoogle] = useSignInWithGoogle(auth);
+
     const navigate = useNavigate();
 
     if (user) {
@@ -29,6 +34,10 @@ const Register = () => {
         alert('Updated profile');
         navigate('/login');
 
+    }
+
+    const googleSignIn = () => {
+        signInWithGoogle();
     }
     return (
         <div className='register w-50 mx-auto mt-5 '>
@@ -60,6 +69,12 @@ const Register = () => {
                 </div>
                 <p className='fw-bold text-center mt-2'>Already have an account? <span><Link to='/login' className='text-decoration-none'>Login</Link></span></p>
             </form>
+            <div className='form-group d-flex justify-content-center'>
+                <button onClick={googleSignIn} class="btn w-50" style={{ backgroundColor: "#c5cdf1" }}><FcGoogle />&nbsp;SignIn with Google</button>
+            </div>
+            <div className='form-group d-flex justify-content-center mt-3'>
+                <button class="btn w-50" style={{ backgroundColor: "#c5cdf1" }}><BsGithub />&nbsp;SignIn with Github</button>
+            </div>
         </div>
     );
 };
