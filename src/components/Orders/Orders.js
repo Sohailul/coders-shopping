@@ -8,7 +8,7 @@ import ReviewItem from '../ReviewItem/ReviewItem';
 import './Orders.css';
 
 const Orders = () => {
-    const [products, setProducts] = useProducts();
+    const [products] = useProducts();
     const [cart, setCart] = useState([]);
     const navigate = useNavigate();
 
@@ -16,7 +16,7 @@ const Orders = () => {
         const storedCart = getStoredCart();
         const savedCart = [];
         for (const id in storedCart) {
-            const addedProduct = products.find(product => product.id === id);
+            const addedProduct = products.find(product => product._id === id);
             if (addedProduct) {
                 const quantity = storedCart[id];
                 addedProduct.quantity = quantity;
@@ -27,9 +27,9 @@ const Orders = () => {
     }, [products])
 
     const handleRemoveProduct = product => {
-        const rest = cart.filter(pd => pd.id !== product.id);
+        const rest = cart.filter(pd => pd._id !== product._id);
         setCart(rest);
-        removeFromDb(product.id);
+        removeFromDb(product._id);
     }
 
     return (
@@ -39,7 +39,7 @@ const Orders = () => {
                 <div className="review-items-container col-sm-12 col-md-8">
                     {
                         cart.map(product => <ReviewItem
-                            key={product.id}
+                            key={product._id}
                             product={product}
                             handleRemoveProduct={handleRemoveProduct}
                         ></ReviewItem>)

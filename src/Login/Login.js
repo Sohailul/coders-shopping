@@ -47,7 +47,7 @@ const Login = () => {
     return (
         <div className='w-50 mx-auto mt-5'>
             <h2 className='text-center mb-5'>Please Login</h2>
-            <SocialLogin/>
+            <SocialLogin />
             <div className='d-flex justify-content-center align-items-center'>
                 <div style={{ height: '1px' }} className='bg-primary w-25'></div>
                 <p className='mt-2 px-2'>or</p>
@@ -73,8 +73,8 @@ const Login = () => {
                     <button type="submit" className="btn w-100 p-3 fs-5" style={{ backgroundColor: "#c5cdf1" }}>Login</button>
                 </div>
                 <div className='d-flex justify-content-around align-items-center mt-2'>
-                <p className='fw-bold text-center mt-2'>Don’t have an account? <span><Link to='/register' className='text-decoration-none'>Register now</Link></span></p>
-                <p className='fw-bold text-center mt-2'>Forgot Password? <span><Link to='/login' onClick={resetPassword} className='text-decoration-none'>Reset Password</Link></span></p>
+                    <p className='fw-bold text-center mt-2'>Don’t have an account? <span><Link to='/register' className='text-decoration-none'>Register now</Link></span></p>
+                    <p className='fw-bold text-center mt-2'>Forgot Password? <span><Link to='/login' onClick={resetPassword} className='text-decoration-none'>Reset Password</Link></span></p>
                 </div>
             </form>
             <ToastContainer />

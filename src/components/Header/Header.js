@@ -10,7 +10,7 @@ import { signOut } from 'firebase/auth';
 const Header = () => {
     const [user] = useAuthState(auth);
 
-    const handleSignOut =()=>{
+    const handleSignOut = () => {
         signOut(auth);
     }
     return (
@@ -35,8 +35,19 @@ const Header = () => {
                             <li className="nav-item">
                                 <Link className="nav-link" to='/about'>About</Link>
                             </li>
+                            {
+                                user &&
+                                <>
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to='/addproducts'>Add</Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to='/manageproducts'>Manage</Link>
+                                    </li>
+                                </>
+                            }
                             {user ?
-                                <button onClick={handleSignOut} className="btn btn-link text-decoration-none text-dark fs-5">Log Out&nbsp;<RiLogoutBoxRFill/></button>
+                                <button onClick={handleSignOut} className="btn btn-link text-decoration-none text-dark fs-5">Log Out&nbsp;<RiLogoutBoxRFill /></button>
                                 :
                                 <li className="nav-item">
                                     <Link className="nav-link" to='/login'>Login</Link>

@@ -16,6 +16,9 @@ import Shipment from './components/Shipment/Shipment';
 import Shop from './components/Shop/Shop';
 import Login from './Login/Login';
 import RequireAuth from './Login/RequireAuth/RequireAuth';
+import AddProducts from './components/AddProducts/AddProducts';
+import ManageProducts from './components/ManageProducts/ManageProducts';
+import UpdateProduct from './components/UpdateProduct/UpdateProduct';
 
 function App() {
   return (
@@ -38,7 +41,22 @@ function App() {
             <Shipment />
           </RequireAuth>
         }></Route>
-        <Route path='/about' element={<About/>}></Route>
+        <Route path='/addproducts' element={
+          <RequireAuth>
+            <AddProducts />
+          </RequireAuth>
+        }></Route>
+        <Route path='/manageproducts' element={
+          <RequireAuth>
+            <ManageProducts />
+          </RequireAuth>
+        }></Route>
+        <Route path='/updateproduct/:id' element={
+          <RequireAuth>
+            <UpdateProduct />
+          </RequireAuth>
+        }></Route>
+        <Route path='/about' element={<About />}></Route>
         <Route path='/register' element={<Register />}></Route>
         <Route path='/login' element={<Login />}></Route>
         <Route path='*' element={<NotFound />}></Route>
