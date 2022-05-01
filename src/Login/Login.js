@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGithub } from 'react-firebase-hooks/auth';
+import { useAuthState, useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGithub } from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -7,22 +7,32 @@ import auth from '../firebase.init';
 import SocialLogin from './SocialLogin';
 
 const Login = () => {
+    const [user] = useAuthState(auth);
     const emailRef = useRef('');
     const passwordRef = useRef('');
     const location = useLocation();
     const [
-        signInWithEmailAndPassword,
-        user,
-        loading,
-        error,
-    ] = useSignInWithEmailAndPassword(auth);
-    const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
-    const [signInWithGithub, githubUser] = useSignInWithGithub(auth);
+        signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
+    const [sendPasswordResetEmail] = useSendPasswordResetEmail(auth);
     const navigate = useNavigate();
     let from = location.state?.from?.pathname || "/";
 
     if (user) {
-        navigate(from, { replace: true });
+        const url = 'http://localhost:5000/login';
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify({
+                email: user.email
+            }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            localStorage.setItem('accessToken', data.accessToken);
+            navigate(from, { replace: true });
+        });
     }
 
     const handleSubmit = event => {

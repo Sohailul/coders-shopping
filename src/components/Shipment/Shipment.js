@@ -1,55 +1,49 @@
-import React, { useState } from 'react';
-import { FaShippingFast } from 'react-icons/fa';
+import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
+import { toast, ToastContainer } from 'react-toastify';
+import { useForm } from 'react-hook-form';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const Shipment = () => {
+    const { register, handleSubmit } = useForm();
     const [user] = useAuthState(auth);
-    const [email, setEmail] = useState('');
+    const navigate = useNavigate();
 
-    const handleCreateUser = event =>{
-        event.preventDefault();
-        const name = event.target.name.value;
-        const address = event.target.address.value;
-        const phone = event.target.phone.value;
-        const shipping = {name, email, address, phone};
-        console.log(shipping);
-    }
-    
+    const onSubmit = (data, e) => {
+        console.log(data);
+        const url = 'http://localhost:5000/order';
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                //'authorization': `Bearer ${localStorage.getItem('accessToken')}`,
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+            .then(res => res.json())
+            .then(result => {
+                console.log(result);
+            });
+        toast('Order Added Successfully');
+        e.target.reset();
+        navigate('/allorder');
+    };
+
     return (
-        <div className='form-container mt-5'>
+        <div>
+
             <div className='w-50 mx-auto'>
-                <h2 className='form-title text-center'>Your Shipping Info</h2>
-                <form onSubmit={handleCreateUser}>
-                    <div className="form-group fs-5">
-                        <label htmlFor="name">Your Name</label>
-                        <br/>
-                        <input  type="text" name="name" className="form-control p-3 fs-5" placeholder="Your Name" required/>
-                    </div>
-                    <br/>
-                    <div className="form-group fs-5">
-                        <label htmlFor="email">Your Email</label>
-                        <br/>
-                        <input readOnly type="email" value={user?.email} name="email" className="form-control p-3 fs-5" placeholder="" required/>
-                    </div>
-                    <br/>
-                    <div className="form-group fs-5">
-                        <label htmlFor="address">Address</label>
-                        <br/>
-                        <input type="text" name="address" className="form-control p-3 fs-5" placeholder="Address"  required/>
-                    </div>
-                    <br/>
-                    <div className="form-group fs-5">
-                        <label htmlFor="phone">Phone Number</label>
-                        <br/>
-                        <input type="text" name="phone" className="form-control p-3 fs-5" placeholder="Phone number" required/>
-                    </div>
-                    {/* <p style={{color: 'red'}}>{error}</p> */}
-                    <br/>
-                    <button className='form-submit btn btn-primary w-100 p-2 fs-5 mx-auto d-block' type="submit">Add to Shipping&nbsp;<FaShippingFast/></button>
+                <h2>Add Orders</h2>
+                <form className='d-flex flex-column' onSubmit={handleSubmit(onSubmit)}>
+                    <input className='mb-2' placeholder='Name' {...register("name", { required: true })} />
+                    <input className='mb-2' value={user?.email} type='email' {...register("email")} />
+                    <input className='mb-2' placeholder='Address' type='text' {...register("address")} />
+                    <input className='mb-2' placeholder='Total Price' type='number' {...register("price")} />
+                    <input type="submit" value="Submit Order" />
                 </form>
-                
             </div>
+            <ToastContainer />
         </div>
     );
 };

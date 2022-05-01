@@ -1,17 +1,31 @@
 import React from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { BsGithub } from 'react-icons/bs';
-import { useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useAuthState, useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../firebase.init';
 import { useNavigate } from 'react-router-dom';
 
 const SocialLogin = () => {
-    const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
-    const [signInWithGithub, user1, loading1, error1] = useSignInWithGithub(auth);
+    const [user] = useAuthState(auth);
+    const [signInWithGoogle, googleUser, loading, error] = useSignInWithGoogle(auth);
+    const [signInWithGithub, githubUser] = useSignInWithGithub(auth);
     const navigate = useNavigate();
 
-    if(user || user1){
-        navigate('/shop');
+    if(googleUser || githubUser){
+        fetch('http://localhost:5000/login', {
+            method: 'POST',
+            body: JSON.stringify({
+                email: user.email
+            }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            localStorage.setItem('accessToken', data.accessToken);
+            navigate('/shop');
+        });
     }
 
     const googleSignIn = () =>{
