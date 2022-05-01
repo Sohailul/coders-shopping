@@ -15,7 +15,7 @@ const UpdateProduct = () => {
 
         const updatedProduct = { name, price, shipping, img };
 
-        const url = `http://localhost:5000/product/${id}`;
+        const url = `https://desolate-beach-70600.herokuapp.com/product/${id}`;
         fetch(url, {
             method: 'PUT',
             headers: {

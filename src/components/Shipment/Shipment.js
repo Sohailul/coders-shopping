@@ -12,7 +12,7 @@ const Shipment = () => {
 
     const onSubmit = (data, e) => {
         console.log(data);
-        const url = 'http://localhost:5000/order';
+        const url = 'https://desolate-beach-70600.herokuapp.com/order';
         fetch(url, {
             method: 'POST',
             headers: {

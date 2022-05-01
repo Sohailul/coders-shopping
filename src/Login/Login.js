@@ -18,7 +18,7 @@ const Login = () => {
     let from = location.state?.from?.pathname || "/";
 
     if (user) {
-        const url = 'http://localhost:5000/login';
+        const url = 'https://desolate-beach-70600.herokuapp.com/login';
         fetch(url, {
             method: 'POST',
             body: JSON.stringify({
@@ -28,11 +28,11 @@ const Login = () => {
                 'Content-type': 'application/json; charset=UTF-8',
             },
         })
-        .then((response) => response.json())
-        .then((data) => {
-            localStorage.setItem('accessToken', data.accessToken);
-            navigate(from, { replace: true });
-        });
+            .then((response) => response.json())
+            .then((data) => {
+                localStorage.setItem('accessToken', data.accessToken);
+                navigate(from, { replace: true });
+            });
     }
 
     const handleSubmit = event => {

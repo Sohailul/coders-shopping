@@ -8,7 +8,7 @@ const AllOrder = () => {
 
     useEffect(() => {
         const email = user.email;
-        const url = `http://localhost:5000/order?email=${email}`;
+        const url = `https://desolate-beach-70600.herokuapp.com/order?email=${email}`;
         fetch(url, {
             headers: {
                 'authorization': `${email} ${localStorage.getItem('accessToken')}`,
